@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maheshwari | Portfolio</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fbfd;
+    color: #212121;
+    line-height: 1.6;
+  }
+  a {
+    color: #0056b3;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #003d7a;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+  }
+
+  /* Header */
+  header {
+    background: #0077cc;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  nav a {
+    color: #dcefff;
+    margin-left: 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #fff;
+  }
+
+  /* Main sections */
+  section {
+    margin: 3rem 0;
+  }
+  h2 {
+    color: #0077cc;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #0077cc;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+  }
+
+  /* About section */
+  .about {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .about-text {
+    flex: 1 1 400px;
+  }
+  .about-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  .btn-resume {
+    display: inline-block;
+    background: #0077cc;
+    color: white;
+    padding: 0.6rem 1.3rem;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0,119,204,0.4);
+    transition: background 0.3s ease;
+  }
+  .btn-resume:hover {
+    background: #005fa3;
+    box-shadow: 0 6px 15px rgba(0,95,163,0.6);
+  }
+  .about-image {
+    flex: 1 1 300px;
+    max-width: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  .about-image img {
+    width: 100%;
+    display: block;
+  }
+
+  /* Skills */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .skill {
+    background: #e1f0ff;
+    color: #0077cc;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 3px 7px rgba(0,119,204,0.3);
+    user-select: none;
+  }
+
+  /* Card style for Projects and Internships */
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  }
+  .card h3 {
+    margin-bottom: 0.6rem;
+    color: #004a7f;
+  }
+  .card p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Contact */
+  #contact p, #contact a {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  #contact a {
+    color: #0077cc;
+  }
+  #contact a:hover {
+    color: #004a7f;
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  footer {
+    background: #0077cc;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Scroll Animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about {
+      flex-direction: column;
+      text-align: center;
+    }
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      margin: 0.5rem 1rem;
+    }
+    .about-text, .about-image {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+<!-- Font Awesome for icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const faders = document.querySelectorAll('.fade-in');
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -50px 0px"
+    };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, observerOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  });
+</script>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Maheshwari</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#internships">Internships</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- About -->
+  <section id="about" class="fade-in">
+    <div class="about">
+      <div class="about-text">
+        <h2>👩‍💻 About Me</h2>
+        <p>I'm Maheshwari, a final-year CSE student at Narasimha Reddy Engineering College with an 8.6 CGPA.</p>
+        <p>Passionate about web development and Python, skilled in Python, C, C++, Java basics, HTML, CSS, JavaScript, React, Node.js, and MySQL.</p>
+        <p>My goal is to become a proficient web developer and Python developer.</p>
+        <a class="btn-resume" href="https://in.docworkspace.com/d/sIE6aqrnZAbb4xMMG" target="_blank" download>
+          <i class="fa-solid fa-download"></i> Download Resume
+        </a>
+      </div>
+      <div class="about-image">
+        <img src="C:\Users\mahes\OneDrive\Desktop\WhatsApp Image 2025-03-08 at 07.44.53_458e2dac.jpg" alt="Maheshwari" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="fade-in">
+    <h2>🛠️ Skills</h2>
+    <div class="skills-list">
+      <span class="skill">Python</span>
+      <span class="skill">C</span>
+      <span class="skill">C++</span>
+      <span class="skill">Java (Basics)</span>
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">React</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">MySQL</span>
+      <span class="skill">Teamwork</span>
+      <span class="skill">Adaptability</span>
+      <span class="skill">Time Management</span>
+      <span class="skill">Team Collaboration</span>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="fade-in">
+    <h2>📊 Projects</h2>
+    <div class="card">
+      <h3>Cardio Clever</h3>
+      <p>
+        A machine learning project to predict cardiovascular disease risks using logistic regression and decision trees.
+      </p>
+      <p>Team: 4 members | Duration: 15 days</p>
+      <p>
+        <strong>Approach:</strong> Uses patient data like age, gender, cholesterol, blood pressure, and lifestyle factors to predict risk with ML algorithms.
+      </p>
+      <p>
+        <strong>Outcome:</strong> Early identification of high-risk patients allowing timely intervention. Model achieved high accuracy supporting clinical decisions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Internships -->
+  <section id="internships" class="fade-in">
+    <h2>💼 Internships</h2>
+    <div class="card">
+      <h3>Studio Internship - Web Development</h3>
+      <p>Duration: 2 months</p>
+      <p>Technologies learned: HTML, CSS, JavaScript, Node.js, React</p>
+      <p>Tools used: VS Code</p>
+      <p>
+        <a href="https://in.docworkspace.com/d/sIDaaqrnZAbXzxMMG" target="_blank">Certificate Link</a>
+      </p>
+    </div>
+    <div class="card">
+      <h3>Infosys Internship - Python Full Stack Developer</h3>
+      <p>
+        <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_5501638797018560000_shared/1-dc425b4e-188c-4af2-a242-647db29c5e3b.pdf" target="_blank">Certificate Link</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" class="fade-in">
+    <h2>🎓 Education</h2>
+    <div class="card">
+      <h3>B.Tech - Computer Science & Engineering</h3>
+      <p>Narasimha Reddy Engineering College | 8.6 CGPA | Expected 2026</p>
+    </div>
+    <div class="card">
+      <h3>12th Grade</h3>
+      <p>TSWRIES Junior College, Kamareddy | 94% | 2022</p>
+    </div>
+    <div class="card">
+      <h3>10th Class</h3>
+      <p>Kasturba Gandhi Balika Vidyalaya | 10 GPA | 2020</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="fade-in">
+    <h2>📞 Contact</h2>
+    <p><i class="fa-solid fa-envelope"></i> <a href="mailto:maheshwaripeddanthi@gmail.com">maheshwaripeddanthi@gmail.com</a></p>
+    <p><i class="fa-solid fa-phone"></i> <a href="tel:+917032061737">+91 70320 61737</a></p>
+    <p><i class="fa-solid fa-linkedin"></i> <a href="https://www.linkedin.com/in/peddanethi-maheshwari-5740a2349/" target="_blank">LinkedIn Profile</a></p>
+    <p><i class="fa-solid fa-language"></i> Languages: Telugu, English, Basic Hindi</p>
+    <p><i class="fa-solid fa-book"></i> Interests: Reading books, playing games, learning new things</p>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 Peddanethi Maheshwari. All rights reserved.
+</footer>
+
+</body>
+</html>
